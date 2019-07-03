@@ -1,26 +1,47 @@
-.App {
-  text-align: center;
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url('./assets/roboto/RobotoMono-Regular.ttf') format('truetype') /* Safari, Android, iOS */
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Roboto';
+  font-style: bold;
+  font-weight: 900;
+  src: url('./assets/roboto/RobotoMono-Bold.ttf') format('truetype') /* Safari, Android, iOS */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+@font-face {
+  font-family: 'Roboto';
+  font-style: italic;
+  font-weight: 400;
+  src: url('./assets/roboto/RobotoMono-Italic.ttf') format('truetype') /* Safari, Android, iOS */
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 100;
+  src: url('./assets/roboto/RobotoMono-Light.ttf') format('truetype') /* Safari, Android, iOS */
+}
+
+* {
+  font-family: 'Roboto';
+}
+
+.Home {
+  background: #D6E8FC;
+  height: 100vh;
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  overflow: hidden;
 }
 
-.App-link {
-  color: #61dafb;
+.Home-Index-window {
+  width: 700px;
+  align-self: center;
+  margin: 0 auto;
 }
 
 @keyframes App-logo-spin {

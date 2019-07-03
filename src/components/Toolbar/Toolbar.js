@@ -7,7 +7,7 @@ class Toolbar extends Component {
   render() {
     return (
       <div className='Toolbar'>
-        <p className='Toolbar-name'> {this.props.name} </p>
+        <p className='name'> {this.props.name} </p>
         <div className='icons'>
           <img src={info} className='Toolbar-icon' onClick={this.props.flip} alt='More info'/>
           <img src={close} className='Toolbar-icon' onClick={this.props.close} alt='Close window'/>

@@ -8,15 +8,24 @@
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  padding-left: 10px;
   font-weight: bold;
-  .icons {
+  border-bottom: 1px solid white;
+
+  .name, .icons {
     position: relative;
+  }
+
+  .name {
+    left: 10px;
+    text-transform: uppercase;
+  }
+
+  .icons {
     right: 10px;
 
     img {
-      height: 20px;
-      margin-right: 10px;
+      height: 15px;
+      margin-left: 7.5px;
     }
   }
 

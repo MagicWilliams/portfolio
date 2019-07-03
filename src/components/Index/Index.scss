@@ -1,0 +1,54 @@
+.Index-window {
+  text-align: left;
+  background: #efefef;
+  border: 1px solid #000;
+  padding-bottom: 15px;
+
+  .Index-body {
+    padding: 0px 25px;
+
+    .name {
+      margin-bottom: 0px;
+    }
+
+    .subtitle {
+      margin-top: 5px;
+      margin-bottom: 25px;
+    }
+  }
+
+  .project-links {
+    text-transform: uppercase;
+    margin-bottom: 40px;
+
+    .project-link {
+      display: flex;
+      align-items: center;
+    }
+
+    .project-prefix {
+      margin: 5px 0;
+      margin-right: 5px;
+      font-weight: 400;
+    }
+
+    .project-text {
+      text-decoration: underline;
+      color: #454545;
+      margin: 5px 0;
+      font-weight: 400;
+      &:hover {
+        color: #000;
+        font-weight: 900;
+      }
+    }
+  }
+
+  .hot-links {
+    display: flex;
+    justify-content: space-between;
+    img {
+      height: 20px;
+    }
+  }
+}
