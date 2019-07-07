@@ -34,14 +34,17 @@
   background: #D6E8FC;
   height: 100vh;
   width: 100%;
-  display: flex;
+  position: relative;
   overflow: hidden;
 }
 
 .Home-Index-window {
   width: 700px;
-  align-self: center;
-  margin: 0 auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin-left: -350px;
+  margin-top: -350px;
 }
 
 @keyframes App-logo-spin {

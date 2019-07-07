@@ -4,8 +4,13 @@
   border: 1px solid #000;
   padding-bottom: 15px;
 
+  .Index-handle {
+    cursor: move;
+  }
+
   .Index-body {
     padding: 0px 25px;
+    cursor: pointer;
 
     .name {
       margin-bottom: 0px;

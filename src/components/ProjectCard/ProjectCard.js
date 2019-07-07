@@ -8,18 +8,36 @@ class ProjectCard extends Component {
     showingInfoSide: true,
   }
 
+  flip = () => {
+    const { showingInfoSide } = this.state;
+    this.setState({
+      showingInfoSide: !showingInfoSide,
+    });
+  }
+
   render() {
     const { showingInfoSide } = this.state;
-    const { url, date, description, name } = this.props;
+    const { url, date, description, name, id, showing, offsetX, offsetY } = this.props;
     const needUrl = url != undefined && url != null;
+    const showingStyle = showing ? {
+      visibility: 'visible',
+    } : {
+      visibility: 'hidden',
+    };
+
+    const offsetStyle = {
+      left: offsetX,
+      top: offsetY,
+    };
+
     return (
       <Draggable handle='.ProjectCard-handle'>
-        <div className="ProjectCard">
+        <div style={{...showingStyle, ...offsetStyle}} className="ProjectCard" id={id}>
           <div className="ProjectCard-handle">
-            <Toolbar name={name} close={this.close} flip={this.flip} />
+            <Toolbar name={name} close={() => this.props.closeWindow(this.props.slug)} flip={this.flip} />
           </div>
           { showingInfoSide && (
-            <div>
+            <div className="ProjectCard-body">
               <div className='infoBlock'>
                 <h3 className="header"> WHEN </h3>
                 <h3 className="body"> {date} </h3>

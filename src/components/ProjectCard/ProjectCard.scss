@@ -2,6 +2,21 @@
   background: #232323;
   color: white;
   padding-bottom: 15px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  min-width: 300px;
+  max-width: 600px;
+  border: 1px solid #fff;
+  z-index: 2;
+
+  .ProjectCard-handle {
+    cursor: move;
+  }
+
+  .ProjectCard-body {
+    cursor: pointer;
+  }
 
   .infoBlock {
     padding-left: 25px;
