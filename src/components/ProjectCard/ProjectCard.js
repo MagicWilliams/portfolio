@@ -17,7 +17,7 @@ class ProjectCard extends Component {
 
   render() {
     const { showingInfoSide } = this.state;
-    const { url, date, description, name, id, showing, offsetX, offsetY } = this.props;
+    const { url, date, description, name, id, showing, offsetX, offsetY, slug, openLink, closeWindow } = this.props;
     const needUrl = url != undefined && url != null;
     const showingStyle = showing ? {
       visibility: 'visible',
@@ -34,7 +34,7 @@ class ProjectCard extends Component {
       <Draggable handle='.ProjectCard-handle'>
         <div style={{...showingStyle, ...offsetStyle}} className="ProjectCard" id={id}>
           <div className="ProjectCard-handle">
-            <Toolbar name={name} close={() => this.props.closeWindow(this.props.slug)} flip={this.flip} />
+            <Toolbar name={name} close={() => closeWindow(slug)} flip={this.flip} />
           </div>
           { showingInfoSide && (
             <div className="ProjectCard-body">
@@ -49,7 +49,7 @@ class ProjectCard extends Component {
               { needUrl && (
                 <div className='infoBlock'>
                   <h3 className="header"> URL </h3>
-                  <h3 className="body"> {url} </h3>
+                  <h3 className="url" onClick={() => openLink(url)}> {url} </h3>
                 </div>
               )}
             </div>

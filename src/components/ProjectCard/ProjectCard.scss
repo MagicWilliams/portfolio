@@ -16,6 +16,7 @@
 
   .ProjectCard-body {
     cursor: pointer;
+    padding-right: 5px;
   }
 
   .infoBlock {
@@ -25,9 +26,20 @@
       margin-bottom: 5px;
     }
 
-    .body {
+    .body, .url {
       margin-top: 5px;
       font-weight: 100;
+    }
+
+    .body {
+      padding-right: 10px;
+    }
+
+    .url {
+      text-decoration: underline;
+      &:hover {
+        font-weight: bold;
+      }
     }
   }
 }

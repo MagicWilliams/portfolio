@@ -43,6 +43,10 @@ class App extends Component {
     });
   }
 
+  openLink = (url) => {
+    window.open(url, '_blank');
+  }
+
   arrayRemove = (arr, value) => {
     return arr.filter(function(ele){
        return ele != value;
@@ -82,9 +86,11 @@ class App extends Component {
           closeWindow={this.closeWindow}
           key={key}
           slug={item}
+          url={projects[item].url}
           name={projects[item].name}
           date={projects[item].date}
           description={projects[item].info}
+          openLink={this.openLink}
         />
       ))}
       <div className="Home-Index-window">
