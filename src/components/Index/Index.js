@@ -45,8 +45,8 @@ class Index extends Component {
             </div>
             <div className="hot-links">
               <img src={resume} onClick={() => this.openCard("resume")} alt="Resume" />
-              <img src={github} onClick={() => this.openLink('https://github.com/MagicWilliams')} alt="Github" />
-              <img src={instagram} onClick={() => this.openLink('https://instagram.com/magic.zip')} alt="Instagram" />
+              <img src={github} onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
+              <img src={instagram} onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
             </div>
           </div>
         </div>
