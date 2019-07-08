@@ -32,12 +32,15 @@ class App extends Component {
 
   openWindow = (slug) => {
     const { openWindows } = this.state;
-    if (openWindows.indexOf(slug) === -1) {
+    const index = openWindows.indexOf(slug);
+    if (index === -1) {
       openWindows.push(slug);
-      this.setState({
-        openWindows: openWindows,
-      });
+    } else {
+      openWindows.splice(index, 1);
     }
+    this.setState({
+      openWindows: openWindows,
+    });
   }
 
   arrayRemove = (arr, value) => {
