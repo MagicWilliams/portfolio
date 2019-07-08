@@ -3,6 +3,7 @@ import windowSize from 'react-window-size';
 import './App.css';
 import projects from './utils/projects';
 import Index from './components/Index/Index';
+import Toolbar from './components/Toolbar/Toolbar';
 import ProjectCard from './components/ProjectCard/ProjectCard';
 
 class App extends Component {
@@ -12,6 +13,7 @@ class App extends Component {
       xOffsets: [],
       yOffsets: [],
       openWindows: [],
+      showMailer: false,
     }
   }
 
@@ -44,6 +46,16 @@ class App extends Component {
     });
   }
 
+  colorMe = () => {
+    console.log("color picker");
+  }
+
+  mailMe = () => {
+    this.setState({
+      showMailer: true,
+    });
+  }
+
   closeWindow = (slug) => {
     const { openWindows } = this.state;
     openWindows.splice(openWindows.indexOf(slug), 1);
@@ -57,6 +69,7 @@ class App extends Component {
 
     return (
       <div className="Home">
+      <Toolbar name='davidlatimore.me' colorMe={this.colorMe} mail={this.mailMe} />
       {Object.keys(projects).map((item, key) => (
         <ProjectCard
           offsetX={xOffsets[projects[item].id]}
