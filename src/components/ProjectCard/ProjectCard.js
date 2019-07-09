@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import Toolbar from '../Toolbar/Toolbar';
 import './ProjectCard.scss';
+import actualResume from '../../assets/img/actualResume.png'
 
 class ProjectCard extends Component {
   state = {
@@ -17,7 +18,7 @@ class ProjectCard extends Component {
 
   render() {
     const { showingInfoSide } = this.state;
-    const { url, date, description, name, id, showing, offsetX, offsetY, slug, openLink, closeWindow } = this.props;
+    const { url, date, description, name, id, showing, offsetX, offsetY, slug, openLink, closeWindow, isResume } = this.props;
     const needUrl = url != undefined && url != null;
     const showingStyle = showing ? {
       visibility: 'visible',
@@ -29,6 +30,23 @@ class ProjectCard extends Component {
       left: offsetX,
       top: offsetY,
     };
+
+    const resumeCardStyle = {
+      maxHeight: '400px',
+    }
+
+    if (slug === 'resume') {
+      return (
+        <Draggable handle='.ProjectCard-handle'>
+          <div style={{...showingStyle, ...offsetStyle, ...resumeCardStyle}} className="ProjectCard" id={id}>
+            <div className="ProjectCard-handle">
+              <Toolbar name={name} close={() => closeWindow(slug)} flip={this.flip} />
+            </div>
+            <img className='actualResume' src={actualResume} />
+          </div>
+        </Draggable>
+      )
+    }
 
     return (
       <Draggable handle='.ProjectCard-handle'>

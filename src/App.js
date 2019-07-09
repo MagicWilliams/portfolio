@@ -14,13 +14,26 @@ class App extends Component {
       yOffsets: [],
       openWindows: [],
       showMailer: false,
+      width: 0,
     }
   }
+
+  componentWillMount() {
+    window.addEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
   componentDidMount() {
     const xOffsets = [];
     const yOffsets = [];
-    for (var a = 0; a < 7; a++) {
+    for (var a = 0; a < 50; a++) { // UPDATE WHEN YOU HAVE NEW PROJECTS
       xOffsets[a] = Math.random() * (window.innerWidth - 400);
       yOffsets[a] = Math.random() * (window.innerHeight - 300);
     }
@@ -31,13 +44,25 @@ class App extends Component {
   }
 
   openWindow = (slug) => {
-    const { openWindows } = this.state;
-    const index = openWindows.indexOf(slug);
-    if (index === -1) {
-      openWindows.push(slug);
+    if (slug === 'resume') {
+      this.openResume()
     } else {
-      openWindows.splice(index, 1);
+      const { openWindows } = this.state;
+      const index = openWindows.indexOf(slug);
+      if (index === -1) {
+        openWindows.push(slug);
+      } else {
+        openWindows.splice(index, 1);
+      }
+      this.setState({
+        openWindows: openWindows,
+      });
     }
+  }
+  
+  openResume = () => {
+    const { openWindows } = this.state;
+    openWindows.push('resume');
     this.setState({
       openWindows: openWindows,
     });
@@ -73,29 +98,47 @@ class App extends Component {
 
   render() {
     const { xOffsets, yOffsets, openWindows } = this.state;
+    const { width } = this.state;
+    const isMobile = width <= 500;
+
+    // if (isMobile) {
+    //   return (
+    //     <div className="Home">
+    //       <h1> hannnn lmao </h1>
+    //     </div>
+    //   );
+    // }
 
     return (
       <div className="Home">
-      <Toolbar name='davidlatimore.me' colorMe={this.colorMe} mail={this.mailMe} />
-      {Object.keys(projects).map((item, key) => (
+        <Toolbar name='davidlatimore.me' colorMe={this.colorMe} mail={this.mailMe} />
+        {Object.keys(projects).map((item, key) => (
+          <ProjectCard
+            offsetX={xOffsets[projects[item].id]}
+            offsetY={yOffsets[projects[item].id]}
+            id={projects[item].id}
+            showing={openWindows.includes(item)}
+            closeWindow={this.closeWindow}
+            key={key}
+            slug={item}
+            url={projects[item].url}
+            name={projects[item].name}
+            date={projects[item].date}
+            description={projects[item].info}
+            openLink={this.openLink}
+          />
+        ))}
         <ProjectCard
-          offsetX={xOffsets[projects[item].id]}
-          offsetY={yOffsets[projects[item].id]}
-          id={projects[item].id}
-          showing={openWindows.includes(item)}
+          offsetX={xOffsets[49]}
+          offsetY={yOffsets[49]}
+          showing={openWindows.includes('resume')}
           closeWindow={this.closeWindow}
-          key={key}
-          slug={item}
-          url={projects[item].url}
-          name={projects[item].name}
-          date={projects[item].date}
-          description={projects[item].info}
-          openLink={this.openLink}
+          slug={'resume'}
+          name={'Resume - Winter 2018'}
         />
-      ))}
-      <div className="Home-Index-window">
-        <Index openWindow={this.openWindow}/>
-      </div>
+        <div className="Home-Index-window">
+          <Index openWindow={this.openWindow}/>
+        </div>
       </div>
     );
   }

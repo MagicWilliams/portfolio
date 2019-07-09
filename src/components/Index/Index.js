@@ -8,23 +8,6 @@ import instagram from '../../assets/img/instagram.png';
 import './Index.scss';
 
 class Index extends Component {
-
-  close = () => {
-    console.log("Close window")
-  }
-
-  flip = () => {
-    console.log("Flip window")
-  }
-
-  openCard = () => {
-    console.log("opening card");
-  }
-
-  openLink = (url) => {
-    console.log("open link at: " + url);
-  }
-
   render() {
     return (
       <Draggable handle='.Index-handle'>
@@ -44,7 +27,7 @@ class Index extends Component {
               ))}
             </div>
             <div className="hot-links">
-              <img src={resume} onClick={() => this.openCard("resume")} alt="Resume" />
+              <img src={resume} onClick={() => this.props.openWindow("resume")} alt="Resume" />
               <img src={github} onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
               <img src={instagram} onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
             </div>

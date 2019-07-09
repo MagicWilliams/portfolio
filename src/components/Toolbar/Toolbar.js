@@ -5,20 +5,54 @@ import closeIcon from '../../assets/img/close.png';
 import color from '../../assets/img/color.png';
 import mail from '../../assets/img/mail.png';
 
+const today = new Date();
+
 class Toolbar extends Component {
+
+  componentDidMount() {
+    setInterval(this.updateTime, 1000);
+  }
+
+  state = {
+    time: today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds(),
+  };
+
+  cleanTime = (value, period) => {
+    const today = new Date();
+    if (period === 'seconds' || period === 'minutes') {
+      if (value < 10){
+        return "0" + value;
+      } else {
+        return value <= 11 ? value + " AM" : value + " PM";
+      }
+    }
+  }
+
+  updateTime = () => {
+    const today = new Date();
+    const seconds = today.getSeconds() >= 10 ? today.getSeconds() : '0' + today.getSeconds()
+    const minutes = today.getMinutes() >= 10 ? today.getMinutes() : '0' + today.getMinutes()
+    const time = today.getHours() + ":" + minutes + ":" + seconds;
+    this.setState({
+      time: time,
+    });
+  }
   render() {
     const { name, colorMe, mailMe, flip, close } = this.props;
+    const { time } = this.state;
+
     return (
       <div className='Toolbar'>
         <p className='name'> {name} </p>
           { name === 'davidlatimore.me' ? (
             <div className='icons'>
-              <img src={color} className='Toolbar-icon' onClick={colorMe} alt='Color me'/>
-              <img src={mail} className='Toolbar-icon' onClick={mailMe} alt='Mail me'/>
+              <p className='time'> {time} </p>
+            </div>
+          ) : name === 'index' ? (
+            <div className='icons'>
             </div>
           ) : (
             <div className='icons'>
-              <img src={info} className='Toolbar-icon' onClick={flip} alt='More info'/>
               <img src={closeIcon} className='Toolbar-icon' onClick={close} alt='Close window'/>
             </div>
           )}
