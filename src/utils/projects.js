@@ -29,7 +29,7 @@ export const projects = {
   },
   "dialupstuff": {
     name: "DIAL UP",
-    url: 'https://dialupstuff.com',
+    url: 'http://dialupstuff.com',
     info: 'Built and still maintaining the primary site for DIAL UP, a multi-hyphenate creative collective based in Chicago.',
     date: 'Winter 2017',
     id: 4,
