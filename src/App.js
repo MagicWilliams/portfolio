@@ -35,7 +35,7 @@ class App extends Component {
     const yOffsets = [];
     for (var a = 0; a < 50; a++) { // UPDATE WHEN YOU HAVE NEW PROJECTS
       xOffsets[a] = Math.random() * (window.innerWidth - 400);
-      yOffsets[a] = Math.random() * (window.innerHeight - 300);
+      yOffsets[a] = Math.random() * (window.innerHeight - 200);
     }
     this.setState({
       xOffsets: xOffsets,
@@ -59,7 +59,7 @@ class App extends Component {
       });
     }
   }
-  
+
   openResume = () => {
     const { openWindows } = this.state;
     openWindows.push('resume');
