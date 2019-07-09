@@ -22,7 +22,7 @@ export const projects = {
   },
   "summer-smash": {
     name: "Summer Smash",
-    url: 'https://dialup.digital',
+    url: 'https://apps.apple.com/us/app/the-summer-smash/id1467678976',
     info: 'Working alongside the rest of Dial Up Digital, I designed and developed a mobile app for Summer Smash, an annual music festival held in Chicago hosted by Lyrical Lemonade.',
     date: 'Summer 2018',
     id: 3,
@@ -43,7 +43,7 @@ export const projects = {
   },
   "rogue": {
     name: "Rogue Agency",
-    url: 'https://dialup.digital',
+    url: 'https://rogueagency.us',
     info: 'Built a site for the NYC music agency, along with the rest of Dial Up Digital.',
     date: 'Some time in 2017?',
     id: 6,
