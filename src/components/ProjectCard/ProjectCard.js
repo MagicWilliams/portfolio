@@ -18,8 +18,12 @@ class ProjectCard extends Component {
 
   render() {
     const { showingInfoSide } = this.state;
-    const { url, date, description, name, id, showing, offsetX, offsetY, slug, openLink, closeWindow, isResume } = this.props;
+    const { url, date, description, name, id, showing, offsetX, offsetY, slug, openLink, layer, closeWindow, isResume } = this.props;
     const needUrl = url != undefined && url != null;
+    console.log({
+      name: name,
+      layer: layer,
+    });
     const showingStyle = showing ? {
       visibility: 'visible',
     } : {
@@ -31,6 +35,10 @@ class ProjectCard extends Component {
       top: offsetY,
     };
 
+    const layerStyle = {
+      zIndex: layer,
+    }
+
     const resumeCardStyle = {
       maxHeight: '400px',
     }
@@ -38,7 +46,7 @@ class ProjectCard extends Component {
     if (slug === 'resume') {
       return (
         <Draggable handle='.ProjectCard-handle'>
-          <div style={{...showingStyle, ...offsetStyle, ...resumeCardStyle}} className="ProjectCard" id={id}>
+          <div style={{...showingStyle, ...offsetStyle, ...resumeCardStyle, ...layerStyle}} className="ProjectCard" id={id}>
             <div className="ProjectCard-handle">
               <Toolbar name={name} close={() => closeWindow(slug)} flip={this.flip} />
             </div>

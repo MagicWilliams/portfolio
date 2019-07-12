@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import windowSize from 'react-window-size';
-import './App.css';
+import './App.scss';
 import projects from './utils/projects';
 import Index from './components/Index/Index';
 import Toolbar from './components/Toolbar/Toolbar';
@@ -120,6 +120,7 @@ class App extends Component {
             showing={openWindows.includes(item)}
             closeWindow={this.closeWindow}
             key={key}
+            layer={2 + openWindows.length + openWindows.indexOf(item)}
             slug={item}
             url={projects[item].url}
             name={projects[item].name}
