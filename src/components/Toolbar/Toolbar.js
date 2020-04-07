@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './Toolbar.scss';
-import info from '../../assets/img/info.png';
 import closeIcon from '../../assets/img/close.png';
-import color from '../../assets/img/color.png';
-import mail from '../../assets/img/mail.png';
 
 const today = new Date();
 

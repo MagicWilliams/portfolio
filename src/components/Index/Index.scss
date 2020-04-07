@@ -1,13 +1,19 @@
 .Index-window {
   text-align: left;
-  background: #efefef;
+  background: #FFFBF3;
   border: 1px solid #000;
+  border-radius: 30px;
   padding-bottom: 15px;
   position: relative;
   top: 50px;
 
   .Index-handle {
     cursor: move;
+    border-bottom: 1px solid black;
+    h3 {
+      padding-left: 25px;
+      margin: 15px 0px;
+    }
   }
 
   .Index-body {
@@ -16,21 +22,22 @@
 
     .name {
       margin-bottom: 0px;
+      font-family: 'Gilroy-Medium';
     }
 
     .subtitle {
-      margin-top: 5px;
+      margin-top: 10px;
       margin-bottom: 25px;
     }
   }
 
   .project-links {
-    text-transform: uppercase;
     margin-bottom: 40px;
 
     .project-link {
       display: flex;
       align-items: center;
+      font-size: 20px;
     }
 
     .project-prefix {
@@ -40,13 +47,12 @@
     }
 
     .project-text {
-      text-decoration: underline;
       color: #454545;
       margin: 5px 0;
-      font-weight: 400;
       &:hover {
         color: #000;
         font-weight: 900;
+        text-decoration: underline;
       }
     }
   }

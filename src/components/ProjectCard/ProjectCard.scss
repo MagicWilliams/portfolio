@@ -8,6 +8,7 @@
   min-width: 400px;
   max-width: 600px;
   border: 1px solid #fff;
+  border-radius: 15px;
   z-index: 2;
 
   .actualResume {
@@ -15,13 +16,37 @@
     border: 1px solid #000;
   }
 
+  .project-preview {
+    width: calc(100% - 40px);
+    align-self: center;
+  }
+
+  .date {
+    margin-bottom: 10px;
+  }
+
   .ProjectCard-handle {
     cursor: move;
+    display: flex;
+    height: 25px;
+    justify-content: space-between;
+    border-bottom: 1px solid white;
+    align-items: center;
+    padding: 15px;
+    padding-top: 17.5px;
+
+    img {
+      height: 15px;
+      width: 15px;
+    }
   }
 
   .ProjectCard-body {
     cursor: pointer;
     padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
   }
 
   .infoBlock {

@@ -9,22 +9,27 @@ import './Index.scss';
 
 class Index extends Component {
   render() {
+    const { openWindow, projects } = this.props;
     return (
       <Draggable handle='.Index-handle'>
         <div className="Index-window">
           <div className="Index-handle">
-            <Toolbar name="index" close={this.close} flip={this.flip} />
+            <h3> INDEX </h3>
           </div>
           <div className='Index-body'>
-            <h1 className="name"> david latimore ii </h1>
-            <h5 className="subtitle"> chicago-based developer & interface designer </h5>
+            <h1 className="name"> David Latimore II </h1>
+            <h4 className="subtitle"> Selected Projects </h4>
             <div className="project-links">
-              {Object.keys(projects).map((item, key) => (
-                <div key={key} className="project-link">
-                  <h4 className="project-prefix"> — </h4>
-                  <h4 onClick={() => this.props.openWindow(item)} className="project-text"> {projects[item].name} </h4>
-                </div>
-              ))}
+              {projects.map((project, key) => {
+                const { name } = project.fields;
+                return (
+                  <div key={key} className="project-link">
+                    <h4 className="project-prefix"> — </h4>
+                    <h4 onClick={() => openWindow(name)} className="project-text"> {name} </h4>
+                  </div>
+                )}
+              )}
+
             </div>
             <div className="hot-links">
               <img src={resume} onClick={() => this.props.openWindow("resume")} alt="Resume" />
