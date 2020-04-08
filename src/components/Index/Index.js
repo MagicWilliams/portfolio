@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 import Draggable from 'react-draggable';
 import Toolbar from '../Toolbar/Toolbar';
 import projects from '../../utils/projects';
-import resume from '../../assets/img/resume.png';
-import github from '../../assets/img/github.png';
-import instagram from '../../assets/img/instagram.png';
 import './Index.scss';
 
 class Index extends Component {
@@ -14,7 +11,7 @@ class Index extends Component {
       <Draggable handle='.Index-handle'>
         <div className="Index-window">
           <div className="Index-handle">
-            <h3> INDEX </h3>
+            <h3> Home </h3>
           </div>
           <div className='Index-body'>
             <h1 className="name"> David Latimore II </h1>
@@ -32,9 +29,9 @@ class Index extends Component {
 
             </div>
             <div className="hot-links">
-              <img src={resume} onClick={() => this.props.openWindow("resume")} alt="Resume" />
-              <img src={github} onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
-              <img src={instagram} onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
+              <img src='/img/res-white.svg' onClick={() => this.props.openWindow("resume")} alt="Resume" />
+              <img src='/img/github-white.svg' onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
+              <img src='/img/ig-white.svg' onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
             </div>
           </div>
         </div>

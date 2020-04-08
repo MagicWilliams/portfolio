@@ -20,6 +20,7 @@ class Home extends Component {
       projects: [],
       showMailer: false,
       width: 0,
+      topIndex: 2,
     }
   }
 
@@ -109,7 +110,7 @@ class Home extends Component {
   }
 
   render() {
-    const { xOffsets, yOffsets, openWindows, projects } = this.state;
+    const { xOffsets, yOffsets, openWindows, projects, topIndex } = this.state;
     const { width } = this.state;
     const isMobile = width <= 500;
 
@@ -126,6 +127,7 @@ class Home extends Component {
               showing={openWindows.includes(data.name)}
               closeWindow={this.closeWindow}
               key={key}
+              topIndex={topIndex}
               layer={2 + openWindows.length + openWindows.indexOf(data.name)}
               openLink={this.openLink}
             />
@@ -138,6 +140,7 @@ class Home extends Component {
           closeWindow={this.closeWindow}
           slug={'resume'}
           name={'Resume - Winter 2018'}
+          topIndex={topIndex}
         />
         <div className="Home-Index-window">
           <Index projects={projects} openWindow={this.openWindow}/>

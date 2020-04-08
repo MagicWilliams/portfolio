@@ -1,18 +1,33 @@
 .Index-window {
   text-align: left;
-  background: #FFFBF3;
+  background: #232323;
   border: 1px solid #000;
   border-radius: 30px;
   padding-bottom: 15px;
   position: relative;
   top: 50px;
+  color: white;
 
   .Index-handle {
     cursor: move;
     border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     h3 {
       padding-left: 25px;
       margin: 15px 0px;
+    }
+    .icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-right: 20px;
+      img {
+        height: 22px;
+        width: 22px;
+        margin-left: 10px;
+      }
     }
   }
 
@@ -47,10 +62,10 @@
     }
 
     .project-text {
-      color: #454545;
+      color: #ffffff;
       margin: 5px 0;
       &:hover {
-        color: #000;
+        color: #898989;
         font-weight: 900;
         text-decoration: underline;
       }

@@ -3,7 +3,6 @@ import Draggable from 'react-draggable';
 import Toolbar from '../Toolbar/Toolbar';
 import './ProjectCard.scss';
 import actualResume from '../../assets/img/actualResume.png'
-import closeIcon from '../../assets/img/close.png';
 
 class ProjectCard extends Component {
   state = {
@@ -22,11 +21,11 @@ class ProjectCard extends Component {
       return null;
     }
     const { data, showing, offsetX, offsetY, openLink, layer, closeWindow, isResume } = this.props;
-    console.log(data);
-    const { name, link, description, id, media, when } = data;
+    const { name, references, description, id, media, when } = data;
     const slug = name;
     const { showingInfoSide } = this.state;
-    const needUrl = !!link;
+    const needUrl = references.length >= 1;
+    const linkLabel = references.length === 1 ? 'Link' : 'Links';
     const hasPhoto = media && media.fields.file.url;
     const showingStyle = showing ? {
       visibility: 'visible',
@@ -62,10 +61,16 @@ class ProjectCard extends Component {
 
     return (
       <Draggable handle='.ProjectCard-handle'>
-        <div style={{...showingStyle, ...offsetStyle}} className="ProjectCard" id={id}>
+        <div style={{...showingStyle, ...offsetStyle }} className="ProjectCard" id={id}>
           <div className="ProjectCard-handle">
             <h4> {name} </h4>
-            <img src={closeIcon} className='Toolbar-icon' onClick={() => closeWindow(slug)} alt='Close window'/>
+            <div className='icons'>
+              { hasPhoto && (
+                <img src='/img/i.svg' className='Toolbar-icon' onClick={this.flip} alt='Show media'/>
+              )}
+
+              <img src='/img/x.svg' className='Toolbar-icon' onClick={() => closeWindow(slug)} alt='Close window'/>
+            </div>
           </div>
           { showingInfoSide && (
             <div className="ProjectCard-body">
@@ -77,17 +82,24 @@ class ProjectCard extends Component {
               </div>
               { needUrl && (
                 <div className='infoBlock'>
-                  <h3 className="header"> Link </h3>
-                  <h3 className="url" onClick={() => openLink(link)}> {link} </h3>
+                  <h3 className="header"> {linkLabel} </h3>
+                  <div className='links'>
+                    { references.map((ref, i) => {
+                      console.log(references[i]);
+                      const { name, link } = references[i].fields;
+                      return (
+                        <h3 className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
+                      );
+                    })}
+                  </div>
                 </div>
-              )}
-              { hasPhoto && (
-                <img className='project-preview' src={media.fields.file.url} alt='preview' />
               )}
             </div>
           )}
           { !showingInfoSide && (
-            <h4> showing image </h4>
+            <div className="ProjectCard-body">
+              <img className='project-preview' src={media.fields.file.url} alt='preview' />
+            </div>
           )}
         </div>
       </Draggable>
