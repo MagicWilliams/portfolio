@@ -5,11 +5,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  min-width: 400px;
-  max-width: 600px;
+  width: 40%;
   border: 1px solid #000;
   border-radius: 15px;
-  z-index: 2;
 
   .actualResume {
     width: 100%;
@@ -60,6 +58,7 @@
     padding-right: 5px;
     display: flex;
     flex-direction: column;
+    overflow-wrap: break-word;
     flex: 1;
     max-height: 400px;
     overflow-y: scroll;

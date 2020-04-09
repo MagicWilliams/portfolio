@@ -6,10 +6,16 @@ import './Index.scss';
 
 class Index extends Component {
   render() {
-    const { openWindow, projects } = this.props;
+    const { openWindow, bringToTop, width, projects, openWindows } = this.props;
+    const layer = openWindows.indexOf('Home') === -1 ? -1 : openWindows.indexOf('Home') + 2;
+
+    const layerStyle = {
+      zIndex: layer,
+    }
+
     return (
-      <Draggable handle='.Index-handle'>
-        <div className="Index-window">
+      <Draggable bounds='parent' handle='.Index-handle' defaultPosition={{x: window.innerWidth / 4, y: 0}}>
+        <div style={{...layerStyle}} onClick={() => bringToTop('Home')} className="Index-window">
           <div className="Index-handle">
             <h3> Home </h3>
           </div>
@@ -22,7 +28,7 @@ class Index extends Component {
                 return (
                   <div key={key} className="project-link">
                     <h4 className="project-prefix"> — </h4>
-                    <h4 onClick={() => openWindow(name)} className="project-text"> {name} </h4>
+                    <h4 onClick={(e) => openWindow(name, e)} className="project-text"> {name} </h4>
                   </div>
                 )}
               )}

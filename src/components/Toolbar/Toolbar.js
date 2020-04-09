@@ -15,7 +15,6 @@ class Toolbar extends Component {
   };
 
   cleanTime = (value, period) => {
-    const today = new Date();
     if (period === 'seconds' || period === 'minutes') {
       if (value < 10){
         return "0" + value;
@@ -35,7 +34,7 @@ class Toolbar extends Component {
     });
   }
   render() {
-    const { name, colorMe, mailMe, flip, close } = this.props;
+    const { name, close } = this.props;
     const { time } = this.state;
 
     return (
