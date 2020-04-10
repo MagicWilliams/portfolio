@@ -17,7 +17,12 @@
 
   .name {
     left: 10px;
-    text-transform: uppercase;
+    font-family: 'Courier';
+  }
+
+  .time, .name {
+    font-family: 'Gilroy-ExtraBold';
+    letter-spacing: 1.5px;
   }
 
   .icons {

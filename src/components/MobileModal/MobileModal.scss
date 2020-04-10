@@ -1,0 +1,48 @@
+.MobileModal {
+  background: #fafafa;
+  z-index: 2;
+  padding: 20px;
+  overflow-y: scroll;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  max-height: 90vh;
+  margin-bottom: 25px;
+
+  .date {
+    margin-top: 0px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #232323;
+  }
+
+  .date, .header {
+    font-family: 'Gilroy-Medium';
+  }
+
+  .icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    height: 20px;
+    width: 20px;
+  }
+
+  .body {
+    margin: 0px 10px;
+  }
+
+  .url {
+    color: #000;
+    text-decoration: underline;
+    margin: 5px 0px !important;
+    font-size: 18px;
+
+    &:hover {
+      font-weight: bold;
+    }
+  }
+
+  .infoBlock {
+    margin-bottom: 15px;
+  }
+}

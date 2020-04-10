@@ -1,35 +1,41 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import Toolbar from '../Toolbar/Toolbar';
-import projects from '../../utils/projects';
-import resume from '../../assets/img/resume.png';
-import github from '../../assets/img/github.png';
-import instagram from '../../assets/img/instagram.png';
 import './Index.scss';
 
 class Index extends Component {
   render() {
+    const { openWindow, bringToTop, projects, openWindows, resume } = this.props;
+    const layer = openWindows.indexOf('Home') === -1 ? -1 : openWindows.indexOf('Home') + 2;
+
+    const layerStyle = {
+      zIndex: layer,
+    }
+
     return (
-      <Draggable handle='.Index-handle'>
-        <div className="Index-window">
+      <Draggable bounds='parent' handle='.Index-handle' defaultPosition={{x: window.innerWidth / 3, y: 100}}>
+        <div style={{...layerStyle}} onClick={() => bringToTop('Home')} className="Index-window">
           <div className="Index-handle">
-            <Toolbar name="index" close={this.close} flip={this.flip} />
+            <h3> Home </h3>
           </div>
           <div className='Index-body'>
-            <h1 className="name"> david latimore ii </h1>
-            <h5 className="subtitle"> chicago-based developer & interface designer </h5>
+            <h1 className="name"> David Latimore II </h1>
+            <h4 className="subtitle"> Selected Projects </h4>
             <div className="project-links">
-              {Object.keys(projects).map((item, key) => (
-                <div key={key} className="project-link">
-                  <h4 className="project-prefix"> — </h4>
-                  <h4 onClick={() => this.props.openWindow(item)} className="project-text"> {projects[item].name} </h4>
-                </div>
-              ))}
+              {projects.map((project, key) => {
+                const { name } = project.fields;
+                return (
+                  <div key={key} className="project-link">
+                    <h4 className="project-prefix"> — </h4>
+                    <h4 onClick={(e) => openWindow(name, e)} className="project-text"> {name} </h4>
+                  </div>
+                )}
+              )}
+
             </div>
             <div className="hot-links">
-              <img src={resume} onClick={() => this.props.openWindow("resume")} alt="Resume" />
-              <img src={github} onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
-              <img src={instagram} onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
+              <img src='/img/res-white.svg' onClick={() => window.open(resume, '_blank')} alt="Resume" />
+              <img src='/img/github-white.svg' onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
+              <img src='/img/ig-white.svg' onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
             </div>
           </div>
         </div>

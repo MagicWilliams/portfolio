@@ -1,15 +1,13 @@
-.Index-window {
+.MobileIndex {
   text-align: left;
   background: #232323;
   border: 1px solid #000;
   border-radius: 30px;
   padding-bottom: 15px;
-  position: relative;
-  top: 50px;
-  width: 50%;
-  min-width: 450px;
-  max-width: 650px;
+  width: 90%;
   color: white;
+  position: relative;
+  top: -50px;
 
   .Index-handle {
     cursor: move;

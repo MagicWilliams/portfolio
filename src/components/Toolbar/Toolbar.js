@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import './Toolbar.scss';
-import info from '../../assets/img/info.png';
 import closeIcon from '../../assets/img/close.png';
-import color from '../../assets/img/color.png';
-import mail from '../../assets/img/mail.png';
 
 const today = new Date();
 
@@ -18,7 +15,6 @@ class Toolbar extends Component {
   };
 
   cleanTime = (value, period) => {
-    const today = new Date();
     if (period === 'seconds' || period === 'minutes') {
       if (value < 10){
         return "0" + value;
@@ -38,7 +34,7 @@ class Toolbar extends Component {
     });
   }
   render() {
-    const { name, colorMe, mailMe, flip, close } = this.props;
+    const { name, close } = this.props;
     const { time } = this.state;
 
     return (

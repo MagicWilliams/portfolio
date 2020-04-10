@@ -1,27 +1,67 @@
 .ProjectCard {
-  background: #232323;
-  color: white;
+  background: #fafafa;
+  color: #000;
   padding-bottom: 15px;
   position: absolute;
   left: 0;
   top: 0;
-  min-width: 400px;
-  max-width: 600px;
-  border: 1px solid #fff;
-  z-index: 2;
+  width: 40%;
+  border: 1px solid #000;
+  border-radius: 15px;
 
   .actualResume {
     width: 100%;
     border: 1px solid #000;
   }
 
+  .icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+      height: 22px;
+      width: 22px;
+      margin-left: 10px;
+    }
+  }
+
+  .project-preview {
+    width: calc(100% - 40px);
+    align-self: center;
+    padding: 10px;
+    border: 1px solid #000;
+    margin-top: 15px;
+  }
+
+  .date {
+    margin-bottom: 10px;
+  }
+
   .ProjectCard-handle {
     cursor: move;
+    display: flex;
+    height: 25px;
+    justify-content: space-between;
+    border-bottom: 1px solid #000;
+    align-items: center;
+    padding: 15px;
+    padding-top: 17.5px;
+
+    img {
+      height: 15px;
+      width: 15px;
+    }
   }
 
   .ProjectCard-body {
     cursor: pointer;
     padding-right: 5px;
+    display: flex;
+    flex-direction: column;
+    overflow-wrap: break-word;
+    flex: 1;
+    max-height: 400px;
+    overflow-y: scroll;
   }
 
   .infoBlock {
@@ -32,16 +72,26 @@
     }
 
     .body, .url {
-      margin-top: 5px;
       font-weight: 100;
     }
 
     .body {
-      padding-right: 10px;
+      padding: 0px 10px;
+      padding-right: 25px;
+    }
+
+    .links {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      margin-bottom: 10px;
     }
 
     .url {
+      color: #000;
       text-decoration: underline;
+      margin: 5px 0px !important;
+      font-size: 18px;
       &:hover {
         font-weight: bold;
       }

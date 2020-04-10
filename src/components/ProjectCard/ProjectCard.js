@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import Toolbar from '../Toolbar/Toolbar';
 import './ProjectCard.scss';
-import actualResume from '../../assets/img/actualResume.png'
 
 class ProjectCard extends Component {
   state = {
@@ -17,13 +15,20 @@ class ProjectCard extends Component {
   }
 
   render() {
+    console.log('\n\n\n');
+    if (!this.props.data) {
+      return null;
+    }
+    const { data, bringToTop, openWindows, offsetX, offsetY, openLink, closeWindow } = this.props;
+    const { name, references, description, id, media, when } = data;
+    const showing = openWindows.includes(name)
+    const slug = name;
     const { showingInfoSide } = this.state;
-    const { url, date, description, name, id, showing, offsetX, offsetY, slug, openLink, layer, closeWindow, isResume } = this.props;
-    const needUrl = url != undefined && url != null;
-    console.log({
-      name: name,
-      layer: layer,
-    });
+    const needUrl = references.length >= 1;
+    const linkLabel = references.length === 1 ? 'Link' : 'Links';
+    const hasPhoto = media && media.fields.file.url;
+    const layer = openWindows.indexOf(name) === -1 ? -1 : openWindows.indexOf(name) + 2;
+    console.log(name + ": " + layer);
     const showingStyle = showing ? {
       visibility: 'visible',
     } : {
@@ -39,49 +44,46 @@ class ProjectCard extends Component {
       zIndex: layer,
     }
 
-    const resumeCardStyle = {
-      maxHeight: '400px',
-    }
-
-    if (slug === 'resume') {
-      return (
-        <Draggable handle='.ProjectCard-handle'>
-          <div style={{...showingStyle, ...offsetStyle, ...resumeCardStyle, ...layerStyle}} className="ProjectCard" id={id}>
-            <div className="ProjectCard-handle">
-              <Toolbar name={name} close={() => closeWindow(slug)} flip={this.flip} />
-            </div>
-            <img className='actualResume' src={actualResume} />
-          </div>
-        </Draggable>
-      )
-    }
-
     return (
-      <Draggable handle='.ProjectCard-handle'>
-        <div style={{...showingStyle, ...offsetStyle}} className="ProjectCard" id={id}>
+      <Draggable bounds='parent' handle='.ProjectCard-handle'>
+        <div onClick={() => bringToTop(name)} style={{...showingStyle, ...offsetStyle, ...layerStyle}} className="ProjectCard" id={id}>
           <div className="ProjectCard-handle">
-            <Toolbar name={name} close={() => closeWindow(slug)} flip={this.flip} />
+            <h4> {name} </h4>
+            <div className='icons'>
+              { hasPhoto && (
+                <img src='/img/i.svg' className='Toolbar-icon' onClick={this.flip} alt='Show media'/>
+              )}
+
+              <img src='/img/x.svg' className='Toolbar-icon' onClick={(e) => closeWindow(slug, e)} alt='Close window'/>
+            </div>
           </div>
           { showingInfoSide && (
             <div className="ProjectCard-body">
               <div className='infoBlock'>
-                <h3 className="header"> WHEN </h3>
-                <h3 className="body"> {date} </h3>
+                <h3 className="date"> {when} </h3>
               </div>
               <div className='infoBlock'>
-                <h3 className="header"> WHAT I DID </h3>
                 <h3 className="body"> {description} </h3>
               </div>
               { needUrl && (
                 <div className='infoBlock'>
-                  <h3 className="header"> URL </h3>
-                  <h3 className="url" onClick={() => openLink(url)}> {url} </h3>
+                  <h3 className="header"> {linkLabel} </h3>
+                  <div className='links'>
+                    { references.map((ref, i) => {
+                      const { name, link } = references[i].fields;
+                      return (
+                        <h3 className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
             </div>
           )}
           { !showingInfoSide && (
-            <h4> showing image </h4>
+            <div className="ProjectCard-body">
+              <img className='project-preview' src={media.fields.file.url} alt='preview' />
+            </div>
           )}
         </div>
       </Draggable>
