@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, Component } from 'react';
 import windowSize from 'react-window-size';
 import Draggable from 'react-draggable';
 
@@ -6,24 +6,45 @@ import './App.scss';
 import Index from './components/Index/Index';
 import Toolbar from './components/Toolbar/Toolbar';
 import ProjectCard from './components/ProjectCard/ProjectCard';
+import MobileIndex from './components/MobileIndex/MobileIndex';
+import MobileModal from './components/MobileModal/MobileModal';
 
 const client = require('contentful').createClient({
   space: process.env.REACT_APP_PORTFOLIO_CONTENTFUL_SPACE_ID,
   accessToken: process.env.REACT_APP_PORTFOLIO_CONTENTFUL_ACCESS_TOKEN
 });
 
-class Home extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      xOffsets: [],
-      yOffsets: [],
-      openWindows: ['Home'],
       projects: [],
-      showMailer: false,
       width: 0,
-      topIndex: 2,
     }
+  }
+
+  colorMe = () => {
+    console.log("color picker");
+  }
+
+  mailMe = () => {
+    this.setState({
+      showMailer: true,
+    });
+  }
+
+  async componentDidMount() {
+    let projects;
+
+    await client.getEntries({
+      content_type: 'project',
+    }).then((res) => {
+      projects = [...res.items];
+    });
+    this.setState({
+      projects: projects,
+      width: null,
+    });
   }
 
   componentWillMount() {
@@ -38,21 +59,42 @@ class Home extends Component {
     this.setState({ width: window.innerWidth });
   };
 
+  render() {
+    const { projects, width } = this.state;
+    console.log(width);
+    if (!projects) {
+      return null
+    }
+    if (width === null) {
+      this.setState({ width: window.innerWidth });
+      return null;
+    }
+    return this.state.width < 500 ? <MobileHome projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} /> : <DesktopHome projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} />;
+  }
+}
+
+class DesktopHome extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      xOffsets: [],
+      yOffsets: [],
+      openWindows: ['Home'],
+      projects: [],
+      showMailer: false,
+      topIndex: 2,
+    }
+  }
+
   async componentDidMount() {
     const xOffsets = [];
     const yOffsets = [];
-    let projects;
     for (var a = 0; a < 50; a++) { // UPDATE WHEN YOU HAVE NEW PROJECTS
       xOffsets[a] = Math.random() * (window.innerWidth * .6);
       yOffsets[a] = Math.random() * (window.innerHeight - 400);
     }
-    await client.getEntries({
-      content_type: 'project',
-    }).then((res) => {
-      projects = [...res.items];
-    });
+
     this.setState({
-      projects: projects,
       xOffsets: xOffsets,
       yOffsets: yOffsets,
     });
@@ -118,16 +160,6 @@ class Home extends Component {
     this.setState({ openWindows });
   }
 
-  colorMe = () => {
-    console.log("color picker");
-  }
-
-  mailMe = () => {
-    this.setState({
-      showMailer: true,
-    });
-  }
-
   closeWindow = (slug, e) => {
     e.stopPropagation();
     const { openWindows } = this.state;
@@ -138,12 +170,11 @@ class Home extends Component {
   }
 
   render() {
-    const { xOffsets, yOffsets, openWindows, projects, topIndex } = this.state;
-    const { width } = this.state;
-    const isMobile = width <= 500;
+    const { xOffsets, yOffsets, openWindows, topIndex } = this.state;
+    const { projects, mailMe, colorMe } = this.props;
     return (
       <div className="Home">
-        <Toolbar name='davidlatimore.me' colorMe={this.colorMe} mail={this.mailMe} />
+        <Toolbar name='davidlatimore.me' colorMe={colorMe} mail={mailMe} />
         { projects.map((project, key) => {
           const data = project.fields;
           return (
@@ -181,10 +212,60 @@ class Home extends Component {
           openWindows={openWindows}
           projects={projects}
         />
-
       </div>
     );
   }
 }
 
-export default Home;
+const MobileHome = props => {
+  const { projects, mailMe, colorMe, openLink } = props;
+  const [activeProject, setActiveProject] = useState({});
+  const close = () => {
+    setActiveProject({});
+  }
+  const showProject = slug => {
+    const i = projects.indexOf(activeProject);
+    console.log(i);
+    setActiveProject(projects[i].fields);
+  }
+
+  return (
+    <div className='mobile-container'>
+      <Toolbar name='davidlatimore.me' colorMe={colorMe} mail={mailMe} />
+      <div className='MobileHome'>
+        <MobileIndex setActiveProject={setActiveProject} close={close} projects={projects} />
+        { !!activeProject.name && (
+          <div className='darken'> </div>
+        )}
+        { !!activeProject.name && (
+          <MobileModal close={close} project={activeProject} />
+        )}
+        <style jsx> {`
+          .mobile-container {
+            max-height: 100vh;
+            overflow: hidden;
+          }
+          .MobileHome {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
+          .darken {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, .75);
+          }
+        `} </style>
+      </div>
+    </div>
+
+  )
+}
+
+
+
+export default App;

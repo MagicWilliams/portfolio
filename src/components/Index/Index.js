@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import Toolbar from '../Toolbar/Toolbar';
-import projects from '../../utils/projects';
 import './Index.scss';
 
 class Index extends Component {
   render() {
-    const { openWindow, bringToTop, width, projects, openWindows } = this.props;
+    const { openWindow, bringToTop, projects, openWindows } = this.props;
     const layer = openWindows.indexOf('Home') === -1 ? -1 : openWindows.indexOf('Home') + 2;
 
     const layerStyle = {
@@ -14,7 +12,7 @@ class Index extends Component {
     }
 
     return (
-      <Draggable bounds='parent' handle='.Index-handle' defaultPosition={{x: window.innerWidth / 4, y: 0}}>
+      <Draggable bounds='parent' handle='.Index-handle' defaultPosition={{x: window.innerWidth / 3, y: 100}}>
         <div style={{...layerStyle}} onClick={() => bringToTop('Home')} className="Index-window">
           <div className="Index-handle">
             <h3> Home </h3>
