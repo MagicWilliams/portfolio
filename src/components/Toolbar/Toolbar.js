@@ -3,7 +3,6 @@ import './Toolbar.scss';
 import closeIcon from '../../assets/img/close.png';
 
 const today = new Date();
-
 class Toolbar extends Component {
 
   componentDidMount() {
@@ -34,18 +33,23 @@ class Toolbar extends Component {
     });
   }
   render() {
-    const { name, close } = this.props;
+    const { name, close, bkg, toggle, isMobile } = this.props;
     const { time } = this.state;
 
     return (
       <div className='Toolbar'>
         <p className='name'> {name} </p>
-          { name === 'davidlatimore.me' ? (
+          { name === 'davidlatimore.me' && !isMobile ? (
             <div className='icons'>
+              <img onClick={toggle} src='/img/color.svg' className='Toolbar-icon' alt='Close window'/>
               <p className='time'> {time} </p>
             </div>
           ) : name === 'index' ? (
             <div className='icons'>
+            </div>
+          ) : isMobile ? (
+            <div>
+
             </div>
           ) : (
             <div className='icons'>
