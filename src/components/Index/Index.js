@@ -4,7 +4,7 @@ import './Index.scss';
 
 class Index extends Component {
   render() {
-    const { openWindow, bringToTop, projects, openWindows } = this.props;
+    const { openWindow, bringToTop, projects, openWindows, resume } = this.props;
     const layer = openWindows.indexOf('Home') === -1 ? -1 : openWindows.indexOf('Home') + 2;
 
     const layerStyle = {
@@ -33,7 +33,7 @@ class Index extends Component {
 
             </div>
             <div className="hot-links">
-              <img src='/img/res-white.svg' onClick={() => this.props.openWindow("resume")} alt="Resume" />
+              <img src='/img/res-white.svg' onClick={() => window.open(resume, '_blank')} alt="Resume" />
               <img src='/img/github-white.svg' onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
               <img src='/img/ig-white.svg' onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
             </div>

@@ -1,7 +1,4 @@
 import React, { useState, Component } from 'react';
-import windowSize from 'react-window-size';
-import Draggable from 'react-draggable';
-
 import './App.scss';
 import Index from './components/Index/Index';
 import Toolbar from './components/Toolbar/Toolbar';
@@ -20,6 +17,7 @@ class App extends Component {
     this.state = {
       projects: [],
       width: 0,
+      resume: ''
     }
   }
 
@@ -35,15 +33,28 @@ class App extends Component {
 
   async componentDidMount() {
     let projects;
+    let resume;
 
-    await client.getEntries({
-      content_type: 'project',
-    }).then((res) => {
-      projects = [...res.items];
-    });
-    this.setState({
-      projects: projects,
-      width: null,
+    const getResumeLink = async function() {
+      await client.getAsset('4haGJtqXPZltTf9jnbp2Wk').then((res) => {
+        resume = res.fields.file.url;
+      })
+    }
+
+    const getProjects = async function() {
+      await client.getEntries({
+        content_type: 'project',
+      }).then((res) => {
+        projects = [...res.items];
+      });
+    }
+
+    Promise.all([getResumeLink(), getProjects()]).then(() => {
+      this.setState({
+        projects: projects,
+        resume: resume,
+        width: null,
+      });
     });
   }
 
@@ -60,16 +71,15 @@ class App extends Component {
   };
 
   render() {
-    const { projects, width } = this.state;
-    console.log(width);
-    if (!projects) {
+    const { projects, width, resume } = this.state;
+    if (!projects || resume === '') {
       return null
     }
     if (width === null) {
       this.setState({ width: window.innerWidth });
       return null;
     }
-    return this.state.width < 500 ? <MobileHome projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} /> : <DesktopHome projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} />;
+    return this.state.width < 500 ? <MobileHome resume={resume} projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} /> : <DesktopHome resume={resume} projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} />;
   }
 }
 
@@ -82,7 +92,6 @@ class DesktopHome extends Component {
       openWindows: ['Home'],
       projects: [],
       showMailer: false,
-      topIndex: 2,
     }
   }
 
@@ -97,20 +106,6 @@ class DesktopHome extends Component {
     this.setState({
       xOffsets: xOffsets,
       yOffsets: yOffsets,
-    });
-  }
-
-  increaseMax = () => {
-    const { topIndex } = this.state;
-    this.setState({
-      topIndex: this.state.topIndex + 1,
-    })
-  }
-
-  decreaseMax = () => {
-    const { topIndex } = this.state;
-    this.setState({
-      topIndex: this.state.topIndex - 1,
     });
   }
 
@@ -146,7 +141,7 @@ class DesktopHome extends Component {
 
   arrayRemove = (arr, value) => {
     return arr.filter(function(ele){
-       return ele != value;
+       return ele !== value;
     });
   }
 
@@ -170,8 +165,8 @@ class DesktopHome extends Component {
   }
 
   render() {
-    const { xOffsets, yOffsets, openWindows, topIndex } = this.state;
-    const { projects, mailMe, colorMe } = this.props;
+    const { xOffsets, yOffsets, openWindows } = this.state;
+    const { projects, mailMe, colorMe, resume } = this.props;
     return (
       <div className="Home">
         <Toolbar name='davidlatimore.me' colorMe={colorMe} mail={mailMe} />
@@ -189,7 +184,6 @@ class DesktopHome extends Component {
               data={data}
               openWindows={openWindows}
               key={key}
-              topIndex={topIndex}
             />
           )
         })}
@@ -198,7 +192,6 @@ class DesktopHome extends Component {
           closeWindow={this.closeWindow}
           offsetX={xOffsets[49]}
           offsetY={yOffsets[49]}
-          topIndex={topIndex}
           openWindows={openWindows}
           showing={openWindows.includes('resume')}
           slug={'resume'}
@@ -211,6 +204,7 @@ class DesktopHome extends Component {
           openWindow={this.openWindow}
           openWindows={openWindows}
           projects={projects}
+          resume={resume}
         />
       </div>
     );
@@ -218,29 +212,24 @@ class DesktopHome extends Component {
 }
 
 const MobileHome = props => {
-  const { projects, mailMe, colorMe, openLink } = props;
+  const { projects, mailMe, colorMe, resume } = props;
   const [activeProject, setActiveProject] = useState({});
   const close = () => {
     setActiveProject({});
-  }
-  const showProject = slug => {
-    const i = projects.indexOf(activeProject);
-    console.log(i);
-    setActiveProject(projects[i].fields);
   }
 
   return (
     <div className='mobile-container'>
       <Toolbar name='davidlatimore.me' colorMe={colorMe} mail={mailMe} />
       <div className='MobileHome'>
-        <MobileIndex setActiveProject={setActiveProject} close={close} projects={projects} />
+        <MobileIndex setActiveProject={setActiveProject} resume={resume} close={close} projects={projects} />
         { !!activeProject.name && (
           <div className='darken'> </div>
         )}
         { !!activeProject.name && (
           <MobileModal close={close} project={activeProject} />
         )}
-        <style jsx> {`
+        <style jsx="true"> {`
           .mobile-container {
             max-height: 100vh;
             overflow: hidden;

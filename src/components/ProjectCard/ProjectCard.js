@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Draggable from 'react-draggable';
-import Toolbar from '../Toolbar/Toolbar';
 import './ProjectCard.scss';
-import actualResume from '../../assets/img/actualResume.png'
 
 class ProjectCard extends Component {
   state = {
@@ -21,7 +19,7 @@ class ProjectCard extends Component {
     if (!this.props.data) {
       return null;
     }
-    const { data, bringToTop, openWindows, offsetX, offsetY, openLink, closeWindow, isResume } = this.props;
+    const { data, bringToTop, openWindows, offsetX, offsetY, openLink, closeWindow } = this.props;
     const { name, references, description, id, media, when } = data;
     const showing = openWindows.includes(name)
     const slug = name;
@@ -44,23 +42,6 @@ class ProjectCard extends Component {
 
     const layerStyle = {
       zIndex: layer,
-    }
-
-    const resumeCardStyle = {
-      maxHeight: '400px',
-    }
-
-    if (slug === 'resume') {
-      return (
-        <Draggable handle='.ProjectCard-handle'>
-          <div style={{...showingStyle, ...offsetStyle, ...resumeCardStyle, ...layerStyle}} className="ProjectCard" id={id}>
-            <div className="ProjectCard-handle">
-              <Toolbar name={name} close={() => closeWindow(slug)} flip={this.flip} />
-            </div>
-            <img className='actualResume' src={actualResume} />
-          </div>
-        </Draggable>
-      )
     }
 
     return (

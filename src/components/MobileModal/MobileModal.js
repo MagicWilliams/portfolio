@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './MobileModal.scss';
 export default function MobileModal(props) {
-  const { when, name, description, references } = props.project;
+  const { name, description, references } = props.project;
   const { close } = props;
   const needUrl = references.length >= 1;
   const linkLabel = references.length === 1 ? 'Link' : 'Links';
@@ -10,7 +10,7 @@ export default function MobileModal(props) {
   }
   return (
     <div className='MobileModal'>
-      <img className='icon' src='/img/x.svg' onClick={close} />
+      <img className='icon' src='/img/x.svg' onClick={close} alt='close'/>
       <div className="modal-body">
         <div className='infoBlock'>
           <h3 className="date"> {name} </h3>
@@ -26,7 +26,7 @@ export default function MobileModal(props) {
               { references.map((ref, i) => {
                 const { name, link } = references[i].fields;
                 return (
-                  <h3 className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
+                  <h3 key={i} className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
                 );
               })}
             </div>

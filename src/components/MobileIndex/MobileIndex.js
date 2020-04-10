@@ -3,7 +3,7 @@ import './MobileIndex.scss';
 
 class Index extends Component {
   render() {
-    const { setActiveProject, projects } = this.props;
+    const { setActiveProject, projects, resume } = this.props;
     return (
       <div className="MobileIndex">
         <div className="Index-handle">
@@ -25,7 +25,7 @@ class Index extends Component {
 
           </div>
           <div className="hot-links">
-            <img src='/img/res-white.svg' onClick={() => this.props.openWindow("resume")} alt="Resume" />
+            <img src='/img/res-white.svg' onClick={() => window.open(resume, '_blank')} alt="Resume" />
             <img src='/img/github-white.svg' onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
             <img src='/img/ig-white.svg' onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
           </div>
