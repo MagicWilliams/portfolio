@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './Toolbar.scss';
-import closeIcon from '../../assets/img/close.png';
 
 const today = new Date();
 class Toolbar extends Component {
@@ -53,7 +52,7 @@ class Toolbar extends Component {
             </div>
           ) : (
             <div className='icons'>
-              <img src={closeIcon} className='Toolbar-icon' onClick={close} alt='Close window'/>
+              <img src='/img/close.svg' className='Toolbar-icon' onClick={close} alt='Close window'/>
             </div>
           )}
       </div>
