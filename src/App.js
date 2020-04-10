@@ -5,6 +5,7 @@ import Toolbar from './components/Toolbar/Toolbar';
 import ProjectCard from './components/ProjectCard/ProjectCard';
 import MobileIndex from './components/MobileIndex/MobileIndex';
 import MobileModal from './components/MobileModal/MobileModal';
+import { SketchPicker } from 'react-color';
 
 const client = require('contentful').createClient({
   space: process.env.REACT_APP_PORTFOLIO_CONTENTFUL_SPACE_ID,
@@ -19,16 +20,6 @@ class App extends Component {
       width: 0,
       resume: ''
     }
-  }
-
-  colorMe = () => {
-    console.log("color picker");
-  }
-
-  mailMe = () => {
-    this.setState({
-      showMailer: true,
-    });
   }
 
   async componentDidMount() {
@@ -79,7 +70,7 @@ class App extends Component {
       this.setState({ width: window.innerWidth });
       return null;
     }
-    return this.state.width < 500 ? <MobileHome resume={resume} projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} /> : <DesktopHome resume={resume} projects={projects} colorMe={this.colorMe} mailMe={this.mailMe} />;
+    return this.state.width < 500 ? <MobileHome resume={resume} projects={projects} mailMe={this.mailMe} /> : <DesktopHome resume={resume} projects={projects} mailMe={this.mailMe} />;
   }
 }
 
@@ -91,7 +82,8 @@ class DesktopHome extends Component {
       yOffsets: [],
       openWindows: ['Home'],
       projects: [],
-      showMailer: false,
+      showPicker: false,
+      color: '#E8F4FF',
     }
   }
 
@@ -164,12 +156,31 @@ class DesktopHome extends Component {
     });
   }
 
+  togglePickerDisplay = () => {
+    const { showPicker } = this.state;
+    this.setState({
+      showPicker: !showPicker,
+    });
+  }
+
+  changeColor = color => {
+    this.setState({ color: color.hex });
+  }
+
   render() {
-    const { xOffsets, yOffsets, openWindows } = this.state;
-    const { projects, mailMe, colorMe, resume } = this.props;
+    const { xOffsets, yOffsets, openWindows, color, showPicker } = this.state;
+    const { projects, mailMe, resume } = this.props;
+    const bkgColor = {
+      background: color,
+    }
     return (
-      <div className="Home">
-        <Toolbar name='davidlatimore.me' colorMe={colorMe} mail={mailMe} />
+      <div style={bkgColor} className="Home">
+        <Toolbar toggle={this.togglePickerDisplay} name='davidlatimore.me' handleChangeComplete={this.changeColor} mail={mailMe} />
+        { showPicker && (
+          <div className='picker'>
+            <SketchPicker color={color} onChange={this.changeColor} />
+          </div>
+        )}
         { projects.map((project, key) => {
           const data = project.fields;
           return (
@@ -212,7 +223,7 @@ class DesktopHome extends Component {
 }
 
 const MobileHome = props => {
-  const { projects, mailMe, colorMe, resume } = props;
+  const { projects, mailMe, resume } = props;
   const [activeProject, setActiveProject] = useState({});
   const close = () => {
     setActiveProject({});
@@ -220,7 +231,7 @@ const MobileHome = props => {
 
   return (
     <div className='mobile-container'>
-      <Toolbar name='davidlatimore.me' colorMe={colorMe} mail={mailMe} />
+      <Toolbar isMobile name='davidlatimore.me' mail={mailMe} />
       <div className='MobileHome'>
         <MobileIndex setActiveProject={setActiveProject} resume={resume} close={close} projects={projects} />
         { !!activeProject.name && (

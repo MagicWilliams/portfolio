@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './MobileModal.scss';
 export default function MobileModal(props) {
-  const { name, description, references } = props.project;
+  const { name, description, references, media } = props.project;
   const { close } = props;
   const needUrl = references.length >= 1;
   const linkLabel = references.length === 1 ? 'Link' : 'Links';
@@ -15,6 +15,9 @@ export default function MobileModal(props) {
         <div className='infoBlock'>
           <h3 className="date"> {name} </h3>
         </div>
+        { !!media && (
+          <img className='project-preview' src={media.fields.file.url} alt='preview' />
+        )}
         <div className='infoBlock'>
           <h3 className="header"> What I Did </h3>
           <h3 className="body"> {description} </h3>

@@ -15,7 +15,6 @@ class ProjectCard extends Component {
   }
 
   render() {
-    console.log('\n\n\n');
     if (!this.props.data) {
       return null;
     }
@@ -28,7 +27,6 @@ class ProjectCard extends Component {
     const linkLabel = references.length === 1 ? 'Link' : 'Links';
     const hasPhoto = media && media.fields.file.url;
     const layer = openWindows.indexOf(name) === -1 ? -1 : openWindows.indexOf(name) + 2;
-    console.log(name + ": " + layer);
     const showingStyle = showing ? {
       visibility: 'visible',
     } : {
@@ -50,11 +48,14 @@ class ProjectCard extends Component {
           <div className="ProjectCard-handle">
             <h4> {name} </h4>
             <div className='icons'>
-              { hasPhoto && (
+              { hasPhoto && !showingInfoSide && (
                 <img src='/img/i.svg' className='Toolbar-icon' onClick={this.flip} alt='Show media'/>
               )}
+              { hasPhoto && showingInfoSide && (
+                <img src='/img/photo.svg' className='Toolbar-icon' onClick={this.flip} alt='Show media'/>
+              )}
 
-              <img src='/img/x.svg' className='Toolbar-icon' onClick={(e) => closeWindow(slug, e)} alt='Close window'/>
+              <img src='/img/x.svg' className='icon-x' onClick={(e) => closeWindow(slug, e)} alt='Close window'/>
             </div>
           </div>
           { showingInfoSide && (
@@ -72,7 +73,7 @@ class ProjectCard extends Component {
                     { references.map((ref, i) => {
                       const { name, link } = references[i].fields;
                       return (
-                        <h3 className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
+                        <h3 key={i} className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
                       );
                     })}
                   </div>
