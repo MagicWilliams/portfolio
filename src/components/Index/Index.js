@@ -19,7 +19,7 @@ class Index extends Component {
           </div>
           <div className='Index-body'>
             <h1 className="name"> David Latimore II </h1>
-            <h4 className="subtitle"> Selected Projects </h4>
+            <h4 className="subtitle"> full-stack developer, interface designer </h4>
             <div className="project-links">
               {projects.map((project, key) => {
                 const { name } = project.fields;
