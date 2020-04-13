@@ -8,7 +8,7 @@
   top: 50px;
   width: 50%;
   min-width: 450px;
-  max-width: 650px;
+  max-width: 700px;
   color: white;
 
   .Index-handle {
@@ -52,6 +52,17 @@
 
   .project-links {
     margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+
+    .hover-photo {
+      width: 50%;
+      position: absolute;
+      right: 0px;
+      top: 0px;
+      z-index: -1;
+      border: 1px solid white;
+    }
 
     .project-link {
       display: flex;

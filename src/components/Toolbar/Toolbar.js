@@ -26,13 +26,13 @@ class Toolbar extends Component {
     const today = new Date();
     const seconds = today.getSeconds() >= 10 ? today.getSeconds() : '0' + today.getSeconds()
     const minutes = today.getMinutes() >= 10 ? today.getMinutes() : '0' + today.getMinutes()
-    const time = today.getHours() + ":" + minutes + ":" + seconds;
+    const time = today.getHours() + ":" + minutes;
     this.setState({
       time: time,
     });
   }
   render() {
-    const { name, close, bkg, toggle, isMobile } = this.props;
+    const { name, close, toggle, isMobile } = this.props;
     const { time } = this.state;
 
     return (
