@@ -113,7 +113,7 @@ class Index extends Component {
               <img src='/img/res-white.svg' onClick={() => window.open(resume, '_blank')} alt="Resume" />
               <img src='/img/github-white.svg' onClick={() => window.open('https://github.com/MagicWilliams', '_blank')} alt="Github" />
               <img src='/img/ig-white.svg' onClick={() => window.open('https://instagram.com/magic.zip', '_blank')} alt="Instagram" />
-              <a href='mailto:someone@yoursite.com?subject=Mail from Our Site'> <img src='/img/mail.svg' alt="Contact" /> </a>
+              <a href='mailto:david.latimore@me.com?subject=Hello!'> <img src='/img/mail.svg' alt="Contact" /> </a>
             </div>
           </div>
         </div>
