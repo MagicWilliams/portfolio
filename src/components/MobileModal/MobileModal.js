@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './MobileModal.scss';
+
 export default function MobileModal(props) {
   const { name, description, references, media } = props.project;
   const { close } = props;
