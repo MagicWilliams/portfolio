@@ -87,12 +87,6 @@ class DesktopHome extends Component {
     }
   }
 
-  async componentDidMount() {
-    const xOffsets = [];
-    const yOffsets = [];
-
-  }
-
   openWindow = (slug, e) => {
     e.stopPropagation();
     if (slug === 'resume') {
