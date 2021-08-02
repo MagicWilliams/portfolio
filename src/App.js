@@ -27,7 +27,7 @@ class App extends Component {
     let resume;
 
     const getResumeLink = async function() {
-      await client.getAsset('4haGJtqXPZltTf9jnbp2Wk').then((res) => {
+      await client.getAsset('1VSv2FYkIoClsmB7SAPDLo').then((res) => {
         resume = res.fields.file.url;
       })
     }
@@ -90,15 +90,7 @@ class DesktopHome extends Component {
   async componentDidMount() {
     const xOffsets = [];
     const yOffsets = [];
-    for (var a = 0; a < 50; a++) { // UPDATE WHEN YOU HAVE NEW PROJECTS
-      xOffsets[a] = Math.random() * (window.innerWidth * .6);
-      yOffsets[a] = Math.random() * (window.innerHeight - 400);
-    }
 
-    this.setState({
-      xOffsets: xOffsets,
-      yOffsets: yOffsets,
-    });
   }
 
   openWindow = (slug, e) => {
@@ -234,9 +226,6 @@ const MobileHome = props => {
       <Toolbar isMobile name='davidlatimore.me' mail={mailMe} />
       <div className='MobileHome'>
         <MobileIndex setActiveProject={setActiveProject} resume={resume} close={close} projects={projects} />
-        { !!activeProject.name && (
-          <div className='darken'> </div>
-        )}
         { !!activeProject.name && (
           <MobileModal close={close} project={activeProject} />
         )}

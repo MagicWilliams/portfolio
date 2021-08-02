@@ -1,4 +1,5 @@
 import React from 'react';
+import './MobileModal.scss';
 
 export default function MobileModal(props) {
   const { name, description, references, media } = props.project;
@@ -29,7 +30,7 @@ export default function MobileModal(props) {
               { references.map((ref, i) => {
                 const { name, link } = references[i].fields;
                 return (
-                  <h3 key={i} className='url' onClick={() => openLink(link)} href={link} alt={name}> {name} </h3>
+                  <h3 key={i} className='url' onClick={() => openLink(link)} href={link} alt={name}>{name}</h3>
                 );
               })}
             </div>

@@ -38,6 +38,8 @@ class ProjectCard extends Component {
       top: offsetY,
     };
 
+    console.log(offsetStyle);
+
     const layerStyle = {
       zIndex: layer,
     }
