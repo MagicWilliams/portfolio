@@ -87,6 +87,18 @@ class DesktopHome extends Component {
     }
   }
 
+  componentDidMount() {
+    const { xOffsets, yOffsets } = this.state;
+    for (var a = 0; a < 50; a++) {
+      xOffsets.push(Math.round(window.innerWidth * 0.7  * Math.random()));
+      yOffsets.push(Math.round(window.innerHeight * 0.7 * Math.random()));
+    }
+    this.setState({
+      xOffsets,
+      yOffsets
+    });
+  }
+
   openWindow = (slug, e) => {
     e.stopPropagation();
     if (slug === 'resume') {
@@ -159,6 +171,7 @@ class DesktopHome extends Component {
     const bkgColor = {
       background: color,
     }
+    console.log(xOffsets);
     return (
       <div style={bkgColor} className="Home">
         <Toolbar toggle={this.togglePickerDisplay} name='davidlatimore.me' handleChangeComplete={this.changeColor} mail={mailMe} />
