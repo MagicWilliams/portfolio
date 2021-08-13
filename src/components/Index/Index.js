@@ -15,7 +15,6 @@ class Index extends Component {
   }
 
   setCurrPhoto = name => {
-    console.log(name);
     this.setState({
       currPhoto: name,
     });

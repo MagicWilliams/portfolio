@@ -171,7 +171,6 @@ class DesktopHome extends Component {
     const bkgColor = {
       background: color,
     }
-    console.log(xOffsets);
     return (
       <div style={bkgColor} className="Home">
         <Toolbar toggle={this.togglePickerDisplay} name='davidlatimore.me' handleChangeComplete={this.changeColor} mail={mailMe} />
