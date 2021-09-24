@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import FadeIn from '../FadeIn';
 import './ETHJar.scss';
 const Web3 = require('web3');
@@ -29,7 +29,7 @@ export default function ETHJar(props) {
   return (window.ethereum && showTipJar) ? (
     <FadeIn>
       <div className='ETHJar'>
-        <img src="/img/x-yt.svg" onClick={() => setShowTipJar(false)}/>
+        <img src="/img/x-yt.svg" onClick={() => setShowTipJar(false)} alt="Close window"/>
         <h4>If you like my work, please consider donating to fund future works. It'd be greatly appreciated! :)</h4>
         <div className='inputs'>
           <div className="ETHInput">
