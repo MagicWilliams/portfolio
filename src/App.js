@@ -4,6 +4,7 @@ import Index from './components/Index/Index';
 import Toolbar from './components/Toolbar/Toolbar';
 import ProjectCard from './components/ProjectCard/ProjectCard';
 import MobileIndex from './components/MobileIndex/MobileIndex';
+import ETHJar from './components/ETHJar/ETHJar';
 import MobileModal from './components/MobileModal/MobileModal';
 import { SketchPicker } from 'react-color';
 
@@ -173,6 +174,7 @@ class DesktopHome extends Component {
     }
     return (
       <div style={bkgColor} className="Home">
+        <ETHJar />
         <Toolbar toggle={this.togglePickerDisplay} name='davidlatimore.me' handleChangeComplete={this.changeColor} mail={mailMe} />
         { showPicker && (
           <div className='picker'>

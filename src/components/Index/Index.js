@@ -11,7 +11,8 @@ class Index extends Component {
   }
 
   componentDidMount() {
-    this._doSignature()
+    this._doSignature();
+    console.log(window.ethereum);
   }
 
   setCurrPhoto = name => {
@@ -27,9 +28,6 @@ class Index extends Component {
   }
 
   _doSignature() {
-
-
-
     console.log('thanks for visiting');
   }
 
@@ -46,7 +44,8 @@ class Index extends Component {
       <Draggable bounds='parent' handle='.Index-handle' defaultPosition={{x: window.innerWidth / 3, y: 100}}>
         <div style={{...layerStyle}} onClick={() => bringToTop('Home')} className="Index-window">
           <div className="Index-handle">
-            <h3> Home </h3>
+            <h3>Home</h3>
+            <h5>Drag Me!</h5>
           </div>
           <div className='Index-body'>
             <h1 className="name"> David Latimore II </h1>

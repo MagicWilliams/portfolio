@@ -1,0 +1,71 @@
+.ETHJar {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  padding: 16px;
+  padding-top: 24px;
+  width: 270px;
+  background: black;
+  border-radius: 16px;
+  z-index: 100000;
+
+  img {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    height: 20px;
+    width: 20px;
+  }
+  h4 {
+    margin-top: 24px;
+    color: white;
+  }
+
+  .inputs {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+  }
+
+  input {
+    height: 30px;
+    font-size: 1.25rem;
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+
+  }
+
+  .ETHInput {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    h3 {
+      margin: 0 auto;
+      margin-left: 8px;
+      margin-top: 4px;
+    }
+  }
+
+  h3 {
+    color: white;
+    margin-left: 8px;
+  }
+
+  .send-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid white;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 8px;
+    margin-top: 16px;
+
+    &:hover {
+      background: white;
+      color: black;
+    }
+  }
+}
