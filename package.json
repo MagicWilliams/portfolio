@@ -10,7 +10,7 @@
     "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-draggable": "^3.3.2",
-    "react-scripts": "3.0.1",
+    "react-scripts": "5.0.1",
     "react-window-size": "^1.2.2",
     "styled-components": "^5.3.1",
     "web3": "^1.5.3"
